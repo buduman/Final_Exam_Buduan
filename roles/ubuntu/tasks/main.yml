@@ -1,0 +1,47 @@
+---
+# Install Monitoring Tool in Ubuntu
+- name: Install Nagios (Ubuntu)
+  apt:
+    name: nagios3-core
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: start nagios (Ubuntu)
+  service:
+    name: nagios3
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: install nagios reqs (Ubuntu)
+  apt:
+   name:
+    - libpng-dev
+    - libfreetype6-dev
+    - gcc
+    - libc6-dev
+    - apache2
+    - php
+    - libgd-dev
+   state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: start nagios service
+  service:
+    name: nagios3
+    state: started
+    enabled: true
+  when: ansible_distribution == "Ubuntu"
+# Install Enterprise service in Ubuntu
+- name: install nginx 
+  apt:
+    name: nginx
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: true
+  when: ansible_distribution == "Ubuntu"
